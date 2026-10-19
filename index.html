@@ -10,6 +10,9 @@
 <div id="stamp-app" class="w-full max-w-[430px] mx-auto text-[#313b35]">
   <style>
     #stamp-app{font-family:ui-sans-serif,system-ui,"Noto Sans JP",sans-serif;font-size:14px}
+    /* Fixed vector artwork keeps the eight-ray Mac-style asterisk independent of fonts. */
+    #stamp-app .asterisk{display:inline-block;width:.75em;height:.75em;vertical-align:-.025em;flex-shrink:0;overflow:visible}
+    #stamp-app .stamp{white-space:nowrap}
     #stamp-app .muted{color:#888f86}
     #stamp-app button{cursor:pointer}
     #stamp-app button:disabled{opacity:.4;cursor:default}
@@ -29,7 +32,7 @@
     <div class="flex items-center justify-between mb-5">
       <div>
         <div class="text-[11px] tracking-[.18em] text-[#7a927e] font-bold mb-1">MY LITTLE PROGRESS</div>
-        <div class="text-[22px] font-bold tracking-tight">作業のきろく <span class="text-[#c68a69]">✳</span></div>
+        <div class="text-[22px] font-bold tracking-tight">作業のきろく <span class="text-[#c68a69]"><svg class="asterisk" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" fill="none" aria-hidden="true" focusable="false"><path d="M16 1V31M1 16H31M5.4 5.4L26.6 26.6M5.4 26.6L26.6 5.4" stroke="currentColor" stroke-width="2.8"/></svg></span></div>
       </div>
     </div>
     <div class="rounded-2xl p-4 mb-4">
@@ -49,7 +52,7 @@
         <div class="text-center text-[10px] muted">月</div><div class="text-center text-[10px] muted">火</div><div class="text-center text-[10px] muted">水</div><div class="text-center text-[10px] muted">木</div><div class="text-center text-[10px] muted">金</div><div class="text-center text-[10px] muted">土</div><div class="text-center text-[10px] text-[#c27e60]">日</div><div class="text-center text-[10px] muted">週合計</div>
       </div>
       <div id="calgrid" class="grid gap-[2px]" style="grid-template-columns:repeat(7,minmax(0,1fr)) minmax(48px,1.2fr)"></div>
-      <div class="flex items-center justify-center gap-4 mt-4 text-[10px] muted"><span>✳ 作業した日</span><span>✳✳ 2回達成した日</span></div>
+      <div class="flex items-center justify-center gap-4 mt-4 text-[10px] muted"><span><svg class="asterisk" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" fill="none" aria-hidden="true" focusable="false"><path d="M16 1V31M1 16H31M5.4 5.4L26.6 26.6M5.4 26.6L26.6 5.4" stroke="currentColor" stroke-width="2.8"/></svg> 作業した日</span><span><svg class="asterisk" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" fill="none" aria-hidden="true" focusable="false"><path d="M16 1V31M1 16H31M5.4 5.4L26.6 26.6M5.4 26.6L26.6 5.4" stroke="currentColor" stroke-width="2.8"/></svg><svg class="asterisk" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" fill="none" aria-hidden="true" focusable="false"><path d="M16 1V31M1 16H31M5.4 5.4L26.6 26.6M5.4 26.6L26.6 5.4" stroke="currentColor" stroke-width="2.8"/></svg> 2回達成した日</span></div>
     </div>
     <div class="bg-[#eff2e9] rounded-2xl p-4 mb-3">
       <div class="flex items-center justify-between mb-2"><span class="font-bold">今日の作業</span><span id="stagebadge" class="text-[11px] text-[#527c67] bg-white rounded-full px-3 py-1">準備OK</span></div>
@@ -61,7 +64,7 @@
         </div>
       </div>
       <button id="startbtn" class="mainbtn">作業をはじめる</button>
-      <button id="claimbtn" class="mainbtn hidden">作業をした！ ✳ ガチャを引く</button>
+      <button id="claimbtn" class="mainbtn hidden">作業をした！ <svg class="asterisk" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" fill="none" aria-hidden="true" focusable="false"><path d="M16 1V31M1 16H31M5.4 5.4L26.6 26.6M5.4 26.6L26.6 5.4" stroke="currentColor" stroke-width="2.8"/></svg> ガチャを引く</button>
       <div class="flex justify-center gap-3 mt-3">
         <button id="pausebtn" class="text-xs muted underline hidden">一時停止</button>
         <button id="resetbtn" class="text-xs muted underline">タイマーをリセット</button>
@@ -115,7 +118,7 @@
           const cell=document.createElement('div');
           cell.className='day'+(k===today?' today':'');
           if(d.getMonth()!==view.getMonth())cell.style.opacity='.3';
-          cell.innerHTML=`<span class="num">${d.getDate()}</span>${n?`<span class="stamp">${n===1?'✳':'✳✳'}</span>`:''}`;
+          cell.innerHTML=`<span class="num">${d.getDate()}</span>${n?`<span class="stamp">${n===1?'<svg class="asterisk" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" fill="none" aria-hidden="true" focusable="false"><path d="M16 1V31M1 16H31M5.4 5.4L26.6 26.6M5.4 26.6L26.6 5.4" stroke="currentColor" stroke-width="2.8"/></svg>':'<svg class="asterisk" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" fill="none" aria-hidden="true" focusable="false"><path d="M16 1V31M1 16H31M5.4 5.4L26.6 26.6M5.4 26.6L26.6 5.4" stroke="currentColor" stroke-width="2.8"/></svg><svg class="asterisk" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" fill="none" aria-hidden="true" focusable="false"><path d="M16 1V31M1 16H31M5.4 5.4L26.6 26.6M5.4 26.6L26.6 5.4" stroke="currentColor" stroke-width="2.8"/></svg>'}</span>`:''}`;
           grid.appendChild(cell);
         }
         const weekly=document.createElement('div');weekly.className='weekly';weekly.innerHTML=`${sum.toLocaleString()}<br>円`;grid.appendChild(weekly);
@@ -182,12 +185,12 @@
         prize=eligible[eligible.length-1].v;
         for(const item of eligible){r-=item.w;if(r<0){prize=item.v;break}}
       }
-      showModal('<div class="text-5xl my-7 prize">✳</div><div class="text-lg font-bold">ガチャを引こう！</div><p class="text-xs muted mt-2">今日の頑張りへのごほうび</p>','ガチャを引く',()=>{
+      showModal('<div class="text-5xl my-7 prize"><svg class="asterisk" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" fill="none" aria-hidden="true" focusable="false"><path d="M16 1V31M1 16H31M5.4 5.4L26.6 26.6M5.4 26.6L26.6 5.4" stroke="currentColor" stroke-width="2.8"/></svg></div><div class="text-lg font-bold">ガチャを引こう！</div><p class="text-xs muted mt-2">今日の頑張りへのごほうび</p>','ガチャを引く',()=>{
         const latest=current();if(latest.prizes.length>=2){closeModal();return}
         latest.prizes.push(prize);data[today]=latest;save();
         elapsed=0;paused=false;running=false;
         renderCalendar();syncStage();
-        showModal(`<div class="prize"><div class="text-6xl text-[#c27e60] my-5">✳</div><div class="text-sm muted">おめでとう！</div><div class="text-[42px] font-bold text-[#527c67] my-2">${prize}円<span class="text-base"> 獲得</span></div></div><p class="text-xs muted mt-3">カレンダーにスタンプを押しました</p>`, 'カレンダーに戻る',closeModal);
+        showModal(`<div class="prize"><div class="text-6xl text-[#c27e60] my-5"><svg class="asterisk" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" fill="none" aria-hidden="true" focusable="false"><path d="M16 1V31M1 16H31M5.4 5.4L26.6 26.6M5.4 26.6L26.6 5.4" stroke="currentColor" stroke-width="2.8"/></svg></div><div class="text-sm muted">おめでとう！</div><div class="text-[42px] font-bold text-[#527c67] my-2">${prize}円<span class="text-base"> 獲得</span></div></div><p class="text-xs muted mt-3">カレンダーにスタンプを押しました</p>`, 'カレンダーに戻る',closeModal);
       });
     };
     $('prev').onclick=()=>{view=new Date(view.getFullYear(),view.getMonth()-1,1);renderCalendar()};
